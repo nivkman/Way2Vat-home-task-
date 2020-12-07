@@ -1,3 +1,6 @@
+const axios = require('axios');
+const fs = require('fs');
+
 const getResultsFromAPI = async () => {
 
 	const BASE_URL = 'http://foo.bar/data?index=';
@@ -6,12 +9,12 @@ const getResultsFromAPI = async () => {
 	
 	try {
 
-		while (keep_searching) {
+		While (keep_searching) {
 			let res = await axios.get(`${BASE_URL}${index}`);
 			switch (res.status) {
 				case 200:
-          let s_data = JSON.stringify(res.data);
-          fs.appendFile('db.json', s_data);
+				  	let s_data = JSON.stringify(res.data);
+				  	fs.appendFile('db.json', s_data);
 					index++;
 					break;
 
@@ -21,9 +24,8 @@ const getResultsFromAPI = async () => {
 				case 500:
 					throw new UserException('unavailable');
           
-        default:
-          throw new UserException('unknown error');
-
+				default:
+				  throw new UserException('unknown error');
 			}
 
 
